@@ -5,6 +5,8 @@ using UnityEngine;
 public class KillFrog : MonoBehaviour
 {
     public int TotalScore;
+    
+    
 
     [SerializeField] public GameObject DeathEffect2;
     // Start is called before the first frame update
@@ -16,13 +18,14 @@ public class KillFrog : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Lake")
         {
+            
             TotalScore = PlayerPrefs.GetInt("Score ", 0);
             TotalScore--;
             PlayerPrefs.SetInt("Score ", TotalScore);
@@ -37,6 +40,7 @@ public class KillFrog : MonoBehaviour
             //transform.position specifies where the prefab will be spawned.
             //Quaternion.identity is used to specify that we dont want any rotation to our spawned prefab.
             Instantiate(DeathEffect2, transform.position, Quaternion.identity);
+            
         }
        
 

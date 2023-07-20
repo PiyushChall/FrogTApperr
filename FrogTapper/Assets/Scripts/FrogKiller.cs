@@ -8,7 +8,9 @@ public class FrogKiller : MonoBehaviour
     [SerializeField] public GameObject DeathEffect;
 
     public int TotalScore;
-
+    public AudioClip sfx1;
+    public AudioSource source1;
+    public bool soundPlay = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,17 +21,26 @@ public class FrogKiller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (soundPlay)
+        {
+            Debug.Log("playd");
+            source1.clip = sfx1;
+            source1.Play();
+            soundPlay = false;
+        }
     }
 
     private void OnMouseDown()
     {
+
+        soundPlay = true;
         //rhis block of code tells the engine to imcrement the totalscore by 1 when the player clicks on the gameobject.
         TotalScore = PlayerPrefs.GetInt("Score ", 0);
         TotalScore++;
         PlayerPrefs.SetInt("Score ", TotalScore);
         PlayerPrefs.Save();
         Debug.Log("Score " + TotalScore.ToString());
+       
         //rhis line of code tells the engine to destroy the game object when the player clicks on the gameobject.
         Destroy(gameObject);
 
@@ -42,4 +53,5 @@ public class FrogKiller : MonoBehaviour
         Instantiate(DeathEffect, transform.position, Quaternion.identity);      
         
     }
+
 }
